@@ -9,13 +9,18 @@ public class NewWindow {
     JFrame frame;
     JLabel label;
     JButton backButton;
+    Color bgColor;
 
     //constructor for NewWindow class
-    NewWindow(String title, MyFrame previousFrame) {
+    NewWindow(String title, MyFrame previousFrame, Color bgColor) {
         frame = new JFrame(); // new JFrame object assigns it to the instance variable 'frame' of the NewWindow class
-        
-        frame.getContentPane().setBackground(Color.gray); // sets the background color of the new window to grey
+
         JLabel label = new JLabel(title + " to-do list", SwingConstants.CENTER); // The title that you will see in the window
+        if (bgColor != null) {
+        frame.getContentPane().setBackground(bgColor);
+        } else {
+        frame.getContentPane().setBackground(Color.GRAY);
+        }
 
         backButton = new JButton("Back");
         backButton.setBounds(260, 600, 80, 40);
@@ -50,5 +55,10 @@ public class NewWindow {
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+    void updateColor(Color newColor){
+        this.bgColor = newColor;
+        frame.getContentPane().setBackground(bgColor);
+        frame.repaint();
     }
 }
